@@ -16,8 +16,11 @@ let myLibrary = [];
 
 // Event Listeners
 addButtonEl.addEventListener("click", () => {
+    // Checking input
     if(titleEl.value == "" || authorEl.value == "" || pagesEl.value =="" || readEl.value == ""){
         alert("You missed something");
+    }else if(readEl.value != "yes" && readEl.value != "no"){
+        alert("Type yes or no")
     }else{
         let book = new Book(titleEl.value, authorEl.value, pagesEl.value, readEl.value);
         myLibrary.push(book);
@@ -27,6 +30,8 @@ addButtonEl.addEventListener("click", () => {
 
 displayBookButton.addEventListener("click", displayBooks);
 tableEl.addEventListener("click", removeBook);
+tableEl.addEventListener("click", readBook);
+
 
 // Constructor
 function Book(title, author, pages, read){
@@ -55,6 +60,7 @@ function displayBooks(){
         pagesTab.innerHTML = book.pages;
 
         const readTab = document.createElement("td");
+        readTab.classList.add("yesNoRead");
         readTab.innerHTML = book.read
 
         const removeButton = document.createElement("button");
@@ -62,16 +68,19 @@ function displayBooks(){
         removeButton.type = "button";
         removeButton.innerHTML = "remove";
 
-        const toggleSwitch = document.createElement("input");
-        toggleSwitch.type = "checkbox";
-        
+        const readButton = document.createElement("button");
+        readButton.type = "button";
+        readButton.innerHTML = "read"
+        readButton.classList.add("readButton")
+
+
         // Appending created childs
         bk.appendChild(titleTab);
         bk.appendChild(authorTab);
         bk.appendChild(pagesTab);
         bk.appendChild(readTab);
         bk.appendChild(removeButton);
-        bk.appendChild(toggleSwitch);
+        bk.appendChild(readButton);
 
         tableEl.appendChild(bk);
         displayEl.appendChild(tableEl);
@@ -99,7 +108,23 @@ function removeBook(e){
     };
 };
 
+// Read check mark button
+function readBook(e){
+    const item = e.target;
 
+    if(item.classList[0] === "readButton"){
+        const read = item.parentElement;
+        //Selecting Have read element
+        yesNoEl = read.querySelector(".yesNoRead");
+        if(yesNoEl.innerHTML == "yes"){
+            yesNoEl.innerHTML = "no";
+            displayBooks();
+        }else{
+            yesNoEl.innerHTML = "yes";
+            displayBooks();
+        };        
+    };
+};
 
 clearInput()
 // Testing
