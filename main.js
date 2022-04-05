@@ -2,10 +2,11 @@
 const addButtonEl = document.querySelector(".addButton");
 const displayEl = document.querySelector(".displayBook");
 const displayBookButton = document.querySelector(".displayButton");
-const tableEl = document.querySelector(".table");
+const tableEl = document.querySelector(".bodyTable");
+
 
 // Creating elements of input fields
-let titleEl = document.getElementById("Title");
+let titleEl = document.querySelector("#Title");
 let authorEl = document.querySelector("#Author");
 let pagesEl = document.querySelector("#pages");
 let readEl = document.querySelector("#haveRead");
@@ -25,7 +26,7 @@ addButtonEl.addEventListener("click", () => {
 });
 
 displayBookButton.addEventListener("click", displayBooks);
-
+tableEl.addEventListener("click", removeBook);
 
 // Constructor
 function Book(title, author, pages, read){
@@ -36,15 +37,6 @@ function Book(title, author, pages, read){
 };
 
 // Functions
-function addBookToLibrary(){
-
-    // Creating object using constructor
-    let book = new Book(titleEl.value, authorEl.value, pagesEl.value, readEl.value);
-    myLibrary.push(book);
-    clearInput()
-
-};
-
 function displayBooks(){
     for (var i in myLibrary){
         let book = myLibrary[i];
@@ -52,8 +44,6 @@ function displayBooks(){
 
         // Creating table row for each object
         const bk = document.createElement("tr");
-        bk.classList.add("target");
-
 
         const titleTab = document.createElement("td");
         titleTab.innerHTML = book.title;
@@ -71,19 +61,22 @@ function displayBooks(){
         removeButton.classList.add("rmvButton");
         removeButton.type = "button";
         removeButton.innerHTML = "remove";
-        // Remove button event listener
 
-
+        const toggleSwitch = document.createElement("input");
+        toggleSwitch.type = "checkbox";
+        
         // Appending created childs
         bk.appendChild(titleTab);
         bk.appendChild(authorTab);
         bk.appendChild(pagesTab);
         bk.appendChild(readTab);
         bk.appendChild(removeButton);
+        bk.appendChild(toggleSwitch);
 
-        displayEl.appendChild(bk);
+        tableEl.appendChild(bk);
+        displayEl.appendChild(tableEl);
     };
-    myLibrary = [];
+    myLibrary =[];
 };
 
 
@@ -96,8 +89,14 @@ function clearInput(){
 }
 
 // Remove the book from the library function
-function removeBook(){
-    
+function removeBook(e){
+    const item = e.target;
+
+    if(item.classList[0] === "rmvButton"){
+        // Selecting row to remove
+        const row = item.parentElement;
+        row.remove();
+    };
 };
 
 

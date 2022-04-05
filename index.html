@@ -23,7 +23,7 @@
                 <input type="pages" id="pages">
             </div>
             <div>
-                <label for="haveRead">have read?</label><br>
+                <label for="haveRead">Have read?</label><br>
                 <input type="haveRead" id="haveRead">
             </div>
             <button  type="button" class="addButton">Add book</button>
@@ -31,12 +31,15 @@
         </div>
     </form>
     <table class="displayBook">
-        <tr class="table">
-            <th>Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Have read?</th>
-        </tr>
+        <thead>
+            <tr class="table">
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Have read?</th>
+            </tr>
+        </thead>
+        <tbody class="bodyTable"></tbody>
     </table>
     <script src="main.js"></script>
 </body>
