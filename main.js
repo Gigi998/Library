@@ -25,7 +25,7 @@ addButtonEl.addEventListener("click", () => {
         let book = new Book(titleEl.value, authorEl.value, pagesEl.value, readEl.value);
         myLibrary.push(book);
         clearInput()
-    };
+    }
 });
 
 displayBookButton.addEventListener("click", displayBooks);
@@ -33,13 +33,16 @@ tableEl.addEventListener("click", removeBook);
 tableEl.addEventListener("click", readBook);
 
 
-// Constructor
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read
-};
+
+// Class
+class Book{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+}
 
 // Functions
 function displayBooks(){
@@ -84,9 +87,9 @@ function displayBooks(){
 
         tableEl.appendChild(bk);
         displayEl.appendChild(tableEl);
-    };
+    }
     myLibrary =[];
-};
+}
 
 
 // Clear input fields function
@@ -105,8 +108,8 @@ function removeBook(e){
         // Selecting row to remove
         const row = item.parentElement;
         row.remove();
-    };
-};
+    }
+}
 
 // Read check mark button
 function readBook(e){
@@ -115,16 +118,16 @@ function readBook(e){
     if(item.classList[0] === "readButton"){
         const read = item.parentElement;
         //Selecting Have read element
-        yesNoEl = read.querySelector(".yesNoRead");
+        let yesNoEl = read.querySelector(".yesNoRead");
         if(yesNoEl.innerHTML == "yes"){
             yesNoEl.innerHTML = "no";
             displayBooks();
         }else{
             yesNoEl.innerHTML = "yes";
             displayBooks();
-        };        
-    };
-};
+        }     
+    }
+}
 
 clearInput()
 // Testing
