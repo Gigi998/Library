@@ -1,6 +1,6 @@
-import { SyntheticEvent, useState } from "react";
-import { UpdateStudentType } from "../types/studentTypes";
-import { useStudentContext } from "../context/studentContext";
+import { SyntheticEvent, useState } from 'react';
+import { UpdateStudentType } from '../types/studentTypes';
+import { useStudentContext } from '../context/studentContext';
 
 const UpdateStudForm = ({ id, name, email }: UpdateStudentType) => {
   const { updateStudent, setIsUpdate } = useStudentContext();
@@ -52,7 +52,7 @@ const UpdateStudForm = ({ id, name, email }: UpdateStudentType) => {
       </form>
       <button
         onClick={() => setIsUpdate(false)}
-        className="bg-slate-300 hover:bg-slate-200 rounded-lg p-3 w-30 absolute top-0 left-[-200px] text-lg"
+        className="bg-slate-300 hover:bg-slate-200 rounded-lg xl:block xl:max-xl:block  p-3 w-30 absolute top-0 left-[-200px] text-lg hidden"
       >
         Back to Student
       </button>

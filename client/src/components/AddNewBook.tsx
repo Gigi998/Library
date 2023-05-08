@@ -1,17 +1,17 @@
-import React, { SyntheticEvent, useState } from "react";
-import { useBookContext } from "../context/booksContext";
+import React, { SyntheticEvent, useState } from 'react';
+import { useBookContext } from '../context/booksContext';
 
-const AddNewBook = () => {
+function AddNewBook() {
   const { addNewBook } = useBookContext();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const handleSubmit = (e: SyntheticEvent) => {
-    setSearch("");
+    setSearch('');
     e.preventDefault();
   };
   return (
     <div className="add-container">
-      <h2 className="text-4xl mt-2">Add new book</h2>
+      <h2 className="xl:text-4xl mt-2 md:text-2xl md:ml-0">Add new book</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Title:
@@ -34,6 +34,6 @@ const AddNewBook = () => {
       </form>
     </div>
   );
-};
+}
 
 export default AddNewBook;

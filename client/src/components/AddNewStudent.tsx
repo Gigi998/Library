@@ -1,29 +1,29 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useStudentContext } from "../context/studentContext";
+import React, { SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useStudentContext } from '../context/studentContext';
 
 const AddNewStudent = () => {
   const navigate = useNavigate();
   const { addStudent, setSuccessMsg, successMsg } = useStudentContext();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [bookId, setBookId] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [bookId, setBookId] = useState('');
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    setName("");
-    setEmail("");
-    setBookId("");
+    setName('');
+    setEmail('');
+    setBookId('');
   };
 
   useEffect(() => {
-    setSuccessMsg("");
+    setSuccessMsg('');
   }, [name, email, bookId]);
 
   const delayNavigate = () => {
     setTimeout(() => {
-      navigate("/students");
+      navigate('/students');
     }, 1000);
   };
 
@@ -38,8 +38,8 @@ const AddNewStudent = () => {
         <p
           className={
             successMsg
-              ? "relative rounded w-ful bg-green-500 p-4 mb-2"
-              : "absolute left-full"
+              ? 'relative rounded w-ful bg-green-500 p-4 mb-2'
+              : 'absolute left-full'
           }
         >
           {successMsg}
@@ -69,7 +69,8 @@ const AddNewStudent = () => {
           />
         </label>
         <label>
-          BookId:<span className="ml-36 text-slate-600">*optional</span>
+          BookId:
+          <span className="ml-36 text-slate-600">*optional</span>
           <br />
           <input
             type="text"
@@ -82,9 +83,9 @@ const AddNewStudent = () => {
         <br />
         <button
           className="w-22 h-8 bg-slate-100 mt-3 rounded-xl"
-          disabled={name === "" || email === "" ? true : false}
+          disabled={name === '' || email === '' ? true : false}
           onClick={
-            bookId !== ""
+            bookId !== ''
               ? () => {
                   addStudent({ name, email, bookId });
                   delayNavigate();

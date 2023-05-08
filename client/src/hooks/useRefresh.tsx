@@ -1,7 +1,7 @@
-import { useAuthContext } from "../context/authContext";
-import axios from "../utils/url";
+import { useAuthContext } from '../context/authContext';
+import axios from '../utils/url';
 
-const REFRESH = "/refresh";
+const REFRESH = '/refresh';
 
 const useRefresh = () => {
   const { setAuth } = useAuthContext();
@@ -13,7 +13,7 @@ const useRefresh = () => {
       });
       var newAccToken = result.data.accessToken;
       const email = result.data.email;
-      setAuth((prev) => {
+      setAuth(prev => {
         return { ...prev, accessToken: newAccToken, email: email };
       });
     } catch (error) {

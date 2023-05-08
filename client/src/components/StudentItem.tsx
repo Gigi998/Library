@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useStudentContext } from "../context/studentContext";
+import { Link } from 'react-router-dom';
+import { useStudentContext } from '../context/studentContext';
 
 type StudentItemType = {
   name: string;

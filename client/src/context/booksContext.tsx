@@ -28,10 +28,7 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
   const [availableBooks, setAvailableBooks] = useState<Books[]>([]);
   const [isAvailable, setIsAvailable] = useState(false);
 
-  const fetchAllBooks = async (
-    isMounted: boolean,
-    controller: CustomAbortController
-  ) => {
+  const fetchAllBooks = async (isMounted: boolean, controller: CustomAbortController) => {
     try {
       const result = await axiosToken.get("", {
         signal: controller.signal,
@@ -44,7 +41,10 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
         }
       } else {
         console.log(error);
-        navigate("/auth", { state: { from: location }, replace: true });
+        navigate("/auth", {
+          state: { from: location },
+          replace: true,
+        });
       }
     }
   };

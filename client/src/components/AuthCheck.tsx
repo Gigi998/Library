@@ -1,5 +1,5 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuthContext } from "../context/authContext";
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useAuthContext } from '../context/authContext';
 
 const AuthCheck = () => {
   const { auth } = useAuthContext();

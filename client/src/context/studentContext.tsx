@@ -4,12 +4,7 @@ import axios from "axios";
 import { axiosStud } from "../utils/url";
 import { useNavigate } from "react-router-dom";
 import { CustomAbortController } from "../context/booksContext";
-import {
-  StudentType,
-  AddStudent,
-  IssueBookType,
-  UpdateStudentType,
-} from "../types/studentTypes";
+import { StudentType, AddStudent, IssueBookType, UpdateStudentType } from "../types/studentTypes";
 
 type StudentContext = {
   students: StudentType[];
@@ -17,10 +12,7 @@ type StudentContext = {
   successMsg: string;
   singleStud: StudentType | undefined;
   isUpdate: boolean;
-  getAllStudents: (
-    isMounted: boolean,
-    controller: CustomAbortController
-  ) => void;
+  getAllStudents: (isMounted: boolean, controller: CustomAbortController) => void;
   addStudent: ({ name, email, bookId }: AddStudent) => void;
   setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setSuccessMsg: React.Dispatch<React.SetStateAction<string>>;
@@ -40,15 +32,10 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const [students, setStudents] = useState<StudentType[]>([]);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [singleStud, setSingleStud] = useState<StudentType | undefined>(
-    undefined
-  );
+  const [singleStud, setSingleStud] = useState<StudentType | undefined>(undefined);
   const [isUpdate, setIsUpdate] = useState(false);
 
-  const getAllStudents = async (
-    isMounted: boolean,
-    controller: CustomAbortController
-  ) => {
+  const getAllStudents = async (isMounted: boolean, controller: CustomAbortController) => {
     try {
       const response = await axiosToken.get("", {
         signal: controller.signal,
@@ -68,7 +55,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
 
   const addStudent = async ({ name, email, bookId }: AddStudent) => {
     try {
-      const response = await axiosToken.post("", {
+      await axiosToken.post("", {
         name: name,
         email: email,
         studentBookId: bookId,
@@ -104,9 +91,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
 
   const studentIssueBook = async ({ studentId, bookId }: IssueBookType) => {
     try {
-      const result = await axiosToken.patch(
-        `?studentId=${studentId}&bookId=${bookId}`
-      );
+      await axiosToken.patch(`?studentId=${studentId}&bookId=${bookId}`);
       navigate("/students");
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -125,7 +110,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
 
   const returnBook = async (id: string) => {
     try {
-      const response = await axiosToken.patch(`/${id}`);
+      await axiosToken.patch(`/${id}`);
       if (singleStud) {
         setSingleStud({
           ...singleStud,
@@ -144,7 +129,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
         email: email,
       });
       setSingleStud(result.data);
-      console.log(result.data);
+      // console.log(result.data)
       setIsUpdate(false);
     } catch (error) {
       console.log(error);

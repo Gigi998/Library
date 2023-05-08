@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useBookContext } from "../context/booksContext";
-import BookItem from "../components/BookItem";
-import AddNewBook from "../components/AddNewBook";
+import { useEffect } from 'react';
+import { useBookContext } from '../context/booksContext';
+import BookItem from '../components/BookItem';
+import AddNewBook from '../components/AddNewBook';
 
 const Book = () => {
   const {
@@ -30,17 +30,17 @@ const Book = () => {
 
   return (
     <section className="main-page">
-      <div className="flex items-center justify-between">
-        <h2 className="text-4xl mr-5">
+      <div className="flex lg:flex-row  items-center justify-between flex-col">
+        <h2 className="lg:text-4xl lg:mr-5 text-2xl">
           {!isAvailable
-            ? "These are the all books we have!"
-            : "Available books"}
+            ? 'These are the all books we have!'
+            : 'Available books'}
         </h2>
         <button
-          className="bg-slate-200 h-10 p-3 flex items-center mt-3"
+          className="bg-slate-200 h-10 p-3 flex items-center mt-3 hover:scale-110 ease-linear duration-300 hover:bg-slate-300"
           onClick={toggleAvailable}
         >
-          {isAvailable ? "Show all books" : "Show available books"}
+          {isAvailable ? 'Show all books' : 'Show available books'}
         </button>
       </div>
       <div className="flex items-center flex-col w-full">

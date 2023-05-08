@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import useLogin from "../hooks/useLog";
-import Error from "./Error";
+import React, { SyntheticEvent, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import useLogin from '../hooks/useLog';
+import Error from './Error';
 
 const Login = () => {
   const { email, setEmail, pwd, setPwd, handleLogin, error, setError } =
@@ -19,11 +19,11 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    setError("");
+    setError('');
   }, [email, pwd]);
 
   return (
-    <section className="flex flex-col justify-center w-2/6 border p-2 rounded-xl mx-auto mt-20">
+    <section className="flex flex-col justify-center lg:w-1/3 md:w-2/3 w-5/6  border p-2 rounded-xl mx-auto mt-20">
       <Error errorMsg={errorMsg} />
       <h2 className="text-3xl mx-auto">Welcome back!</h2>
       <form onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ const Login = () => {
           Log in
         </button>
       </form>
-      <h2>Don't have an accaount?</h2>
+      <h2>Don't have an account?</h2>
       <h2>
         <Link to="/register">Register</Link>
       </h2>
