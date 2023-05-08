@@ -1,5 +1,5 @@
-import express from "../../server";
-const router = express.Router();
+import express from '../../server'
+const router = express.Router()
 const {
   getAllStudents,
   addNewStudent,
@@ -8,17 +8,17 @@ const {
   addBookToStudent,
   removeBookFromStud,
   updateStudent,
-} = require("../../controllers/studentsController");
+} = require('../../controllers/studentsController')
 
 router
-  .route("/")
+  .route('/')
   .get(getAllStudents)
   .post(addNewStudent)
   .delete(deleteStudent)
-  .patch(addBookToStudent);
+  .patch(addBookToStudent)
 
-router.route("/:id").get(getSingleStudent).patch(removeBookFromStud);
+router.route('/:id').get(getSingleStudent).patch(removeBookFromStud)
 
-router.route("/:id/update").patch(updateStudent);
+router.route('/:id/update').patch(updateStudent)
 
-module.exports = router;
+module.exports = router
