@@ -1,14 +1,14 @@
-import { SyntheticEvent, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import Error from "./Error";
-import { useStudentContext } from "../context/studentContext";
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import Error from './Error';
+import { useStudentContext } from '../context/studentContext';
 
 const IssueBook = () => {
   const location = useLocation();
   const inputRef = useRef<HTMLInputElement>(null);
   const { studentIssueBook, setErrorMsg, errorMsg } = useStudentContext();
 
-  const [studentId, setStudentId] = useState("");
+  const [studentId, setStudentId] = useState('');
 
   const title = location.state?.title;
   const bookId = location.state?.bookId;
@@ -19,15 +19,15 @@ const IssueBook = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    setStudentId("");
+    setStudentId('');
   };
 
   useEffect(() => {
-    setErrorMsg("");
+    setErrorMsg('');
   }, [studentId]);
 
   return (
-    <section className="w-2/6 border p-2 rounded-xl mx-auto mt-20 flex flex-col justify-center items-center">
+    <section className="lg:w-2/6 border p-2 rounded-xl mx-auto mt-20 flex flex-col justify-center items-center md:w-1/2 w-2/3">
       <Error errorMsg={errorMsg} />
       <h2 className="text-3xl mb-3">Issue book form</h2>
       <p className="my-3">

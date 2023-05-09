@@ -1,10 +1,15 @@
-import { createContext, useContext, useState, ReactNode } from "react";
-import useAddAccToken from "../hooks/useAddAccToken";
-import axios from "axios";
-import { axiosStud } from "../utils/url";
-import { useNavigate } from "react-router-dom";
-import { CustomAbortController } from "../context/booksContext";
-import { StudentType, AddStudent, IssueBookType, UpdateStudentType } from "../types/studentTypes";
+import { createContext, useContext, useState, ReactNode } from 'react';
+import useAddAccToken from '../hooks/useAddAccToken';
+import axios from 'axios';
+import { axiosStud } from '../utils/url';
+import { useNavigate } from 'react-router-dom';
+import { CustomAbortController } from '../context/booksContext';
+import {
+  StudentType,
+  AddStudent,
+  IssueBookType,
+  UpdateStudentType,
+} from '../types/studentTypes';
 
 type StudentContext = {
   students: StudentType[];
@@ -12,7 +17,10 @@ type StudentContext = {
   successMsg: string;
   singleStud: StudentType | undefined;
   isUpdate: boolean;
-  getAllStudents: (isMounted: boolean, controller: CustomAbortController) => void;
+  getAllStudents: (
+    isMounted: boolean,
+    controller: CustomAbortController
+  ) => void;
   addStudent: ({ name, email, bookId }: AddStudent) => void;
   setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
   setSuccessMsg: React.Dispatch<React.SetStateAction<string>>;
@@ -30,46 +38,51 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const axiosToken = useAddAccToken(axiosStud);
   const navigate = useNavigate();
   const [students, setStudents] = useState<StudentType[]>([]);
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [singleStud, setSingleStud] = useState<StudentType | undefined>(undefined);
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [singleStud, setSingleStud] = useState<StudentType | undefined>(
+    undefined
+  );
   const [isUpdate, setIsUpdate] = useState(false);
 
-  const getAllStudents = async (isMounted: boolean, controller: CustomAbortController) => {
+  const getAllStudents = async (
+    isMounted: boolean,
+    controller: CustomAbortController
+  ) => {
     try {
-      const response = await axiosToken.get("", {
+      const response = await axiosToken.get('', {
         signal: controller.signal,
       });
       isMounted && setStudents(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error.name = "CanceledError")) {
+        if ((error.name = 'CanceledError')) {
           return;
         }
       } else {
         console.log(error);
-        navigate("/auth", { state: { from: location }, replace: true });
+        navigate('/auth', { state: { from: location }, replace: true });
       }
     }
   };
 
   const addStudent = async ({ name, email, bookId }: AddStudent) => {
     try {
-      await axiosToken.post("", {
+      await axiosToken.post('', {
         name: name,
         email: email,
         studentBookId: bookId,
       });
       setSuccessMsg(`New student ${name} added!`);
     } catch (error) {
-      setErrorMsg("Error");
+      setErrorMsg('Error');
       console.log(error);
     }
   };
 
   const deleteStudent = async (id: string) => {
     try {
-      await axiosToken.delete("", {
+      await axiosToken.delete('', {
         data: {
           id: id,
         },
@@ -92,15 +105,15 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
   const studentIssueBook = async ({ studentId, bookId }: IssueBookType) => {
     try {
       await axiosToken.patch(`?studentId=${studentId}&bookId=${bookId}`);
-      navigate("/students");
+      navigate('/students');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error?.response?.status === 403) {
-          setErrorMsg("Student ID is required");
+          setErrorMsg('Student ID is required');
         } else if (error?.response?.status === 401) {
-          setErrorMsg("No student matches your ID");
+          setErrorMsg('No student matches your ID');
         } else {
-          setErrorMsg("Server error");
+          setErrorMsg('Server error');
         }
       } else {
         console.log(error);
@@ -128,8 +141,7 @@ export const StudentProvider = ({ children }: { children: ReactNode }) => {
         name: name,
         email: email,
       });
-      setSingleStud(result.data);
-      // console.log(result.data)
+      setSingleStud({ ...result.data, studentBook: singleStud?.studentBook });
       setIsUpdate(false);
     } catch (error) {
       console.log(error);

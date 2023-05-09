@@ -20,6 +20,22 @@ table,th,tr,td{
     max-height: 100%;
 }
 
+@media only screen and (max-width: 600px) {
+    .main-page{
+        padding: 0;
+    }
+}
+
+html{
+    font-size: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    html{
+        font-size: 75%;
+    }
+}
+
 .add-container{
     display: flex;
     flex-direction: column;
@@ -29,17 +45,3 @@ table,th,tr,td{
     padding: 1rem;
     margin-top: 0.5rem;
 }
-
-/* @media only screen and (min-width: 768px) {
-    body{
-        font-size: 1.125rem;
-        line-height: 1.75rem;
-    }
-}
-
-@media only screen and (min-width: 576px) {
-    body {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-} */

@@ -18,14 +18,17 @@ const UpdateStudForm = ({ id, name, email }: UpdateStudentType) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 border-cyan-500 border-2 rounded-lg p-4 mt-2">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <div className="flex flex-col items-center gap-3 rounded-lg mt-2">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-3 md:w-1/2 w-3/4"
+      >
         <label>
           Name:
           <br />
           <input
             type="text"
-            className="outline-none h-10 rounded-xl p-2 mt-1"
+            className="outline-none h-10 rounded-xl p-2 mt-1 w-full"
             placeholder="Name"
             value={nameUpd}
             onChange={(e) => setNameUpd(e.target.value)}
@@ -36,14 +39,14 @@ const UpdateStudForm = ({ id, name, email }: UpdateStudentType) => {
           <br />
           <input
             type="email"
-            className="outline-none h-10 rounded-xl p-2 mt-1"
+            className="outline-none h-10 rounded-xl p-2 mt-1 w-full"
             placeholder="Email"
             value={emailUpd}
             onChange={(e) => setEmailUpd(e.target.value)}
           />
         </label>
         <button
-          className="bg-slate-300 hover:bg-slate-200 rounded-lg p-3 w-2/5 mx-auto"
+          className="bg-slate-300 hover:bg-slate-200 rounded-lg p-3 w-2/5 mx-auto text-xl"
           disabled={!emailUpd || !nameUpd ? true : false}
           onClick={handleUpdate}
         >
