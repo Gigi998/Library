@@ -1,9 +1,9 @@
-import { ReactNode, createContext, useContext, useState } from "react";
-import axios from "axios";
-import useAddAccToken from "../hooks/useAddAccToken";
-import { useNavigate } from "react-router-dom";
-import { Books } from "../types/booksTypes";
-import { axiosBook } from "../utils/url";
+import { ReactNode, createContext, useContext, useState } from 'react';
+import axios from 'axios';
+import useAddAccToken from '../hooks/useAddAccToken';
+import { useNavigate } from 'react-router-dom';
+import { Books } from '../types/booksTypes';
+import { axiosBook } from '../utils/url';
 
 export interface CustomAbortController extends AbortController {}
 
@@ -28,20 +28,23 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
   const [availableBooks, setAvailableBooks] = useState<Books[]>([]);
   const [isAvailable, setIsAvailable] = useState(false);
 
-  const fetchAllBooks = async (isMounted: boolean, controller: CustomAbortController) => {
+  const fetchAllBooks = async (
+    isMounted: boolean,
+    controller: CustomAbortController
+  ) => {
     try {
-      const result = await axiosToken.get("", {
+      const result = await axiosToken.get('', {
         signal: controller.signal,
       });
       isMounted && setBooks(result.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if ((error.name = "CanceledError")) {
+        if ((error.name = 'CanceledError')) {
           return;
         }
       } else {
         console.log(error);
-        navigate("/auth", {
+        navigate('/auth', {
           state: { from: location },
           replace: true,
         });
@@ -51,7 +54,7 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteBook = async (id: string) => {
     try {
-      await axiosToken.delete("", {
+      await axiosToken.delete('', {
         data: {
           id: id,
         },
@@ -64,7 +67,7 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
 
   const addNewBook = async (title: string) => {
     try {
-      const newBook = await axiosToken.post("", {
+      const newBook = await axiosToken.post('', {
         title: title,
       });
       setBooks((prev) => [...prev, newBook.data]);
@@ -79,7 +82,7 @@ export const BookContextProvider = ({ children }: { children: ReactNode }) => {
 
   const getAvailableBooks = async () => {
     try {
-      const result = await axiosToken.get("?freeBooks=true");
+      const result = await axiosToken.get('?freeBooks=true');
       setAvailableBooks(result.data);
     } catch (error) {
       console.log(error);

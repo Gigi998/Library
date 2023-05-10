@@ -52,6 +52,7 @@ const Register = () => {
         <button
           className="w-2/6 block mx-auto bg-slate-200 mt-5 h-8"
           onClick={() => handleRegister({ email: email, pwd: pwd })}
+          disabled={email === '' || pwd === '' ? true : false}
         >
           Register
         </button>

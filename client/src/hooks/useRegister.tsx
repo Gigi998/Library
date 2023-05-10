@@ -1,13 +1,14 @@
-import { useState } from "react";
-import axios from "../utils/url";
+import { useState } from 'react';
+import axiosInstance from '../utils/url';
+import axios from 'axios';
 
-const REGISTER = "/register";
+const REGISTER = '/register';
 
 const useRegister = () => {
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleRegister = async ({
     email,
@@ -18,13 +19,19 @@ const useRegister = () => {
   }) => {
     try {
       const json = JSON.stringify({ email, pwd });
-      const response = await axios.post(REGISTER, json);
+      const response = await axiosInstance.post(REGISTER, json);
       const accessToken = response?.data?.accessToken;
-      setEmail("");
-      setPwd("");
+      setEmail('');
+      setPwd('');
       console.log(accessToken);
     } catch (error) {
-      setError("Error");
+      if (axios.isAxiosError(error)) {
+        if (error?.response?.status === 409) {
+          setError('Email already in use');
+        }
+      } else {
+        setError('Server error');
+      }
     }
   };
 
